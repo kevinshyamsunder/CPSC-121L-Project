@@ -2,10 +2,25 @@
 #define LEFTOVER_RECORD_H
 
 #include <string>
+#include "LeftoverRecord.h"
+#include "crow/query_string.h"
 
 // The LeftoverRecord class represents a record of leftover food.
 // It stores details such as the date, meal, food name, quantity, reason for leftovers,
 // disposal mechanism, and the cost of the leftover food.
+// Converts a crow::query_string into a LeftoverRecord object.
+LeftoverRecord QueryStringToLeftoverRecord(const crow::query_string &query_string) {
+    LeftoverRecord record;
+    record.SetDate(query_string.get("date"));
+    record.SetMeal(query_string.get("meal"));
+    record.SetFoodName(query_string.get("food_name"));
+    record.SetQuantityInOz(std::stod(query_string.get("quantity_in_oz")));
+    record.SetLeftoverReason(query_string.get("leftover_reason"));
+    record.SetDisposalMechanism(query_string.get("disposal_mechanism"));
+    record.SetCost(std::stod(query_string.get("cost")));
+    return record;
+}
+
 class LeftoverRecord {
     public:
         // Sets the date of the leftover record (e.g., "2025-04-18").

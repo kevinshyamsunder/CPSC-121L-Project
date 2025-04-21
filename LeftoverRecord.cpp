@@ -1,4 +1,18 @@
 #include "LeftoverRecord.h"
+#include "crow/json.h"
+
+// Converts a LeftoverRecord into a crow::json::wvalue.
+crow::json::wvalue LeftoverRecordToCrowJSON(const LeftoverRecord &record) {
+    crow::json::wvalue json;
+    json["date"] = record.GetDate();
+    json["meal"] = record.GetMeal();
+    json["food_name"] = record.GetFoodName();
+    json["quantity_in_oz"] = record.GetQuantityInOz();
+    json["leftover_reason"] = record.GetLeftoverReason();
+    json["disposal_mechanism"] = record.GetDisposalMechanism();
+    json["cost"] = record.GetCost();
+    return json;
+}
 
 // Implementation of LeftoverRecord methods
 
